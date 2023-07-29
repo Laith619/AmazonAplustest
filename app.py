@@ -8,7 +8,7 @@ import json
 import re
 
 load_dotenv()
-OPEN_AI_API_KEY = os.getenv("OPEN_AI_API_KEY") # get the API key from the environment variable
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") # get the API key from the environment variable
 
 class ProductInput(BaseModel):
     """Inputs for analyse_product"""
