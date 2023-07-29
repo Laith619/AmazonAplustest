@@ -36,7 +36,7 @@ rules_content = read_prompt_from_file('rules.txt')
 def analyse_product_function(product_input: ProductInput):
     content = product_input.content
 
-    query = f"Please Create Amazon Aplus Content Standard Image Sidebar Module using the following information: {content} "
+    query = f"Please Create high converting, interesting to read Amazon Aplus Content Standard Image Sidebar Module using the following information: {content} "
 
     system_message = read_prompt_from_file('Aplus.txt')
 
@@ -65,31 +65,31 @@ def analyse_product_function(product_input: ProductInput):
                     },  
                     "Headline": {
                         "type": "string",
-                        "description": "Create a headline for the module no longer than 160 characters."
+                        "description": "Create a headline for the module with a minimum of 120 characters and no longer than 160 characters and required to use one of the 'Must have keywords'. the headline is a blend of creativity strategic keyword usage, and clear understanding of the product's unique selling proposition"
                     },                        
                     "subheadline": {
                         "type": "string",
-                        "description": "Create a sub-headline for the module no longer than 200 characters."
+                        "description": "Create a sub-headline for the module with a minimum of 120 characters and no longer than 200 characters and required to use one of the 'Must have keywords'. the headline is a blend of creativity strategic keyword usage, and clear understanding of the product's unique selling proposition"
                     },
                     "body": {
                         "type": "string",
-                        "description": "Create a body for the module no longer than 500 characters."
+                        "description": "Create a body for the module with no less than  250 characters and no longer 500. It should provide a concise, yet detailed description of the product. Highlight key features and benefits here to persuade potential customers.use the 'Must have keywords' and 'Good to have keywords' in the body text description"
                     },
                     "mainbulletpoints": {
                         "type": "string",
-                        "description": "Create 3 bullet points for the module no longer than 60 characters each."
+                        "description": "Create 3 bullet points highlighting the product best features for the module. Each bullet point is no less than 40 no longer than 60 characters."
                     },
                     "sidebarheadline": {
                         "type": "string",
-                        "description": "Create a sidebar headline for the module no longer than 200 characters."
+                        "description": "Create a sidebar headline that is eye catching creative. The headline must be no less than 150 charachers short and no longer than 200 characters."
                     },
                     "sidebarbody": {
                         "type": "string",
-                        "description": "Create a sidebar body for the module no longer than 500 characters."
+                        "description": "Create a sidebar body for the module that is vivid to read and SEO friendly with no less than 400 characters and no longer than 500 characters."
                     },
                     "sidebarbulletpoints": {
                         "type": "string",
-                        "description": "Create 3 sidebar bullet points for the module no longer than 60 characters each."
+                        "description": "Create 3 sidebar bullet points for the module. Each bullet point is no less than 40 no longer than 60 characters."
                     }    
                 },
                 "required": ["Headline", "subheadline", "body", "mainbulletpoints", "sidebarheadline", "sidebarbody", "sidebarbulletpoints"]
@@ -98,7 +98,7 @@ def analyse_product_function(product_input: ProductInput):
     ]
    
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-0613",
+        model="gpt-4-0613",
         messages=messages,
         functions=function_descriptions,
         function_call="auto"
