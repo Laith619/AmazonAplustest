@@ -7,8 +7,6 @@ import os
 import json
 import re
 
-
-
 load_dotenv()
 OPEN_AI_API_KEY = os.getenv("OPEN_AI_API_KEY") # get the API key from the environment variable
 
@@ -16,9 +14,7 @@ class ProductInput(BaseModel):
     """Inputs for analyse_product"""
     content: str = Field(description="Content for Amazon Aplus Content")
 
-
 app = FastAPI()
-
 
 # Define a function to read a prompt from a file
 def read_prompt_from_file(filename):
@@ -34,13 +30,10 @@ def read_prompt_from_file(filename):
         print(f"File {filename} not found.")
         return None
 
-
 # read the rules from file
 rules_content = read_prompt_from_file('rules.txt')
 
-
-@app.post("/analyze_product")
-def analyse_product(product_input: ProductInput):
+def analyse_product_function(product_input: ProductInput):
     content = product_input.content
 
     query = f"Please Create Amazon Aplus Content Standard Image Sidebar Module using the following information: {content} "
@@ -113,3 +106,7 @@ def analyse_product(product_input: ProductInput):
 
     print(response)  # print the response to see what it looks like
     return response
+
+@app.post("/")
+def analyse_product_endpoint(product_input: ProductInput):
+    return analyse_product_function(product_input)
