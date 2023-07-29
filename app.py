@@ -96,16 +96,49 @@ def analyse_product_function(product_input: ProductInput):
             }
         }
     ]
-
+   
     response = openai.ChatCompletion.create(
-        model="gpt-4-0613",
+        model="gpt-3.5-turbo-0613",
         messages=messages,
         functions=function_descriptions,
         function_call="auto"
     )
 
-    print(response)  # print the response to see what it looks like
-    return response
+    # Extract the content from the response
+    assistant_message = response['choices'][0]['message']
+    function_call = assistant_message['function_call']
+    arguments_json = function_call['arguments']
+
+    # Convert the JSON string to a Python dictionary
+    arguments_dict = json.loads(arguments_json)
+
+    # Extract the individual variables
+    headline = arguments_dict['Headline']
+    subheadline = arguments_dict['subheadline']
+    body = arguments_dict['body']
+    mainbulletpoints = arguments_dict['mainbulletpoints']
+    sidebarheadline = arguments_dict['sidebarheadline']
+    sidebarbody = arguments_dict['sidebarbody']
+    sidebarbulletpoints = arguments_dict['sidebarbulletpoints']
+
+    print(f"Headline: {headline}")
+    print(f"Subheadline: {subheadline}")
+    print(f"Body: {body}")
+    print(f"Main Bullet Points: {mainbulletpoints}")
+    print(f"Sidebar Headline: {sidebarheadline}")
+    print(f"Sidebar Body: {sidebarbody}")
+    print(f"Sidebar Bullet Points: {sidebarbulletpoints}")
+
+    return {
+        "Headline": headline,
+        "Subheadline": subheadline,
+        "Body": body,
+        "Main Bullet Points": mainbulletpoints,
+        "Sidebar Headline": sidebarheadline,
+        "Sidebar Body": sidebarbody,
+        "Sidebar Bullet Points": sidebarbulletpoints
+    }
+
 
 @app.post("/")
 def analyse_product_endpoint(product_input: ProductInput):
